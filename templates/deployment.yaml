@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+  labels: 
+  {{- include "serviceName.labels" . | nindent 4 }}
+    date: {{ include "date.labels" . | nindent 6 }}
+spec:
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Release.Name }}
+        image: nginx:{{ .Values.imageVersion }}
+        volumeMounts:
+        - name: {{ .Release.Name }}-config
+          mountPath: /etc/nginx/conf.d
+        ports:
+        - name: http
+          containerPort: {{ .Values.podPort }}
+        imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
+      volumes:
+        - name: {{ .Release.Name }}-config
+          configMap:
+            name: {{ .Release.Name }}-config
