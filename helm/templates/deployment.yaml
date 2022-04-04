@@ -18,14 +18,7 @@ spec:
       containers:
       - name: {{ .Release.Name }}
         image: nginx:{{ .Values.imageVersion }}
-        volumeMounts:
-        - name: {{ .Release.Name }}-config
-          mountPath: /etc/nginx/conf.d
         ports:
         - name: http
           containerPort: {{ .Values.podPort }}
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
-      volumes:
-        - name: {{ .Release.Name }}-config
-          configMap:
-            name: {{ .Release.Name }}-config
