@@ -4,7 +4,7 @@ imagePullPolicy: IfNotPresent
 restartPolicy: OnFailure
 cronJobTime: 0 00 * * *
 
-imageVersion: latest
+imageVersion: 1.26.1
 limitsCpu: 1
 limitsMemory: 1Gi
 requestsCpu: 0.5
