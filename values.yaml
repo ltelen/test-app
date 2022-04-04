@@ -4,9 +4,6 @@ imagePullPolicy: IfNotPresent
 restartPolicy: OnFailure
 cronJobTime: 0 00 * * *
 
-imageRepository: eu.gcr.io/
-projectName: maxbet-me/
-imageName: maxbet_production- # + {{ .Release.Name }} 
 imageVersion: latest
 limitsCpu: 1
 limitsMemory: 1Gi
